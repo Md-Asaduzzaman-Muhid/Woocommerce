@@ -1,0 +1,196 @@
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199px) {
+    .container {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+// (desktops, less than 1200px)
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991px) { 
+
+    .call-info {
+        li {
+            margin-right: 0;
+            a {
+                span {
+                    display: none;
+                }
+    
+                i {
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 50%;
+                  text-align: center;
+                  line-height: 26px;
+                }
+            }
+        }
+    }
+
+    .navbar-expand-md .navbar-nav .nav-link {
+        padding-right: .6rem;
+        padding-left: .4rem;
+        font-size: 12px;
+    }
+
+    .logo img {
+        max-width: 130px;
+        height: auto;
+        margin-top: 0;
+    }
+
+}
+//(tablets, less than 992px)
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767px) { 
+    body {
+        padding-top: 55px;
+    }
+
+    .navbar {
+        padding: 0.5rem 1rem;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        z-index: 50;
+    }
+
+    .navbar-nav > li > .nav-link {
+        border: 0;
+    }
+
+    .navbar-nav {
+        margin-top: 15px;
+        border-top: 1px solid #545454;
+
+        li {
+            border-bottom: 1px solid #545454;
+        }
+    }
+
+    .navbar-nav .nav-link {
+        padding: 0.5rem 1rem;
+    }
+
+    #mainNavigation {
+        margin: 0 -1rem;
+    }
+
+    .navbar-expand-md .navbar-nav .nav-link {
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+
+    .navbar-dark .navbar-nav .show > .nav-link, .navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .nav-link.active {
+        background: $tmpcolor;
+    }
+
+    .sub-menu {
+        padding-left: 0;
+        border-top: 1px solid #545454;
+
+        li:last-child {
+            border-bottom: 0;
+        }
+
+        li a {
+            padding-left: 25px !important;
+        }
+
+        ul {
+            padding-left: 0;
+            border-top: 1px solid #545454;
+
+            li a {
+                padding-left: 35px !important;
+            }
+            
+            li:last-child {
+                border-bottom: 0;
+            }
+        }
+    }
+
+    .logo img {
+        max-width: 90px;
+    }
+
+    .contact-area .fadeInRight dl,
+    .contact-area .fadeInLeft dl {
+        width: 300px;
+        margin: 0 auto;
+    }
+
+    .quicklink-thum-wrap {
+        width: 170px;
+    }
+
+    .quicklink-thum-wrap .qlink-thum {
+        width: 165px;
+        height: 165px;
+    }
+
+    .page-title {
+        margin-bottom: 30px;
+        font-size: 30px;
+    }
+
+    .page-hero {
+        height: 170px;
+    }
+
+    .section-title {
+        padding-bottom: 20px;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .divider {
+        height: 20px;
+    }
+	
+	.error-box {
+        display: block;
+    }
+    
+    .error-text-left {
+        margin: 0 auto 15px
+    }
+    
+    .error-text-right {
+        width: 100%;
+    }
+
+
+}
+//(landscape phones, less than 768px)
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575px) { 
+    .main-slider-wrapper {
+        min-height: 150px;
+    }
+
+    .quicklink-box {
+        margin-top: 30px;
+    }
+    
+    .pre-header {
+        .container {
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    }
+}
+//(portrait phones, less than 576px)
+
+
+@media (max-width: 480px) { 
+    .quote-link {
+        padding: 10px 5px;
+    }
+}

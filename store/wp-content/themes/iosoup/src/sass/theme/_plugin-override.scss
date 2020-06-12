@@ -1,0 +1,55 @@
+/* slick  Dots */
+.slick-dotted.slick-slider
+{
+    margin-bottom: 30px;
+}
+
+.slick-dots
+{
+    position: absolute;
+    bottom: -25px;
+
+}
+.slick-dots li
+{
+    width: 15px;
+    height: 15px;
+}
+.slick-dots li button
+{
+    width: 15px;
+    height: 15px;
+}
+.slick-dots li button:hover,
+.slick-dots li button:focus
+{
+    outline: none;
+}
+.slick-dots li button:hover:before,
+.slick-dots li button:focus:before
+{
+    opacity: 1;
+}
+.slick-dots li button:before
+{
+    width: 14px;
+    height: 14px;
+    content: '';
+    opacity: 1;
+    background-color: darken($tmpcolor, 30%);
+    border: 0 solid #4d4d4d;;
+
+}
+.slick-dots li.slick-active button:before
+{
+    opacity: 1;
+    background-color: $tmpcolor;
+}
+
+.slick-slide:focus {
+    outline: 0;
+}
+
+.slick-slider {
+    user-select: text;
+}

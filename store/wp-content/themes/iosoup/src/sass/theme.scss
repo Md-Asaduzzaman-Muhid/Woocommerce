@@ -1,0 +1,30 @@
+/*
+Theme Name: Html Quick Pack
+Author:
+Author URI:
+Theme URI:
+Front End Developer: MD.Asaduzzaman
+Back End Developer:  MD.Asaduzzaman
+Project Start:
+Date: 03-July-2019
+*/
+
+
+@import "bootstrap4/functions";
+@import "theme/variables"; // <--------- Add your variables into this file. Also add variables to overwrite Bootstrap or UnderStrap variables here
+@import "bootstrap4/bootstrap";
+
+// Any additional imported files //
+@import "fonts/_flaticon.scss"; //flaticon
+@import "theme/header";
+@import "theme/front-page";
+@import "theme/pages-post";
+@import "theme/elements";
+@import "theme/forms";
+@import "theme/media";
+@import "theme/widgets";
+@import "theme/footer";
+@import "theme/utility";
+@import "theme/plugin-override";
+@import "theme/woocommerce";
+@import "theme/responsive";

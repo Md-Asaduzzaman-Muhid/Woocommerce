@@ -1,0 +1,112 @@
+.sidebar-accordion {
+    ul {
+        padding-left: 0;
+        margin: 0;
+        list-style: none;
+        background: #3a3939;
+
+        li {
+            position: relative;
+            margin-bottom: 1px;
+            a {
+                height: 40px;
+                display: block;
+                padding: 8px 35px 8px 15px;
+                border-bottom: 1px solid #464646;
+                color: #fff;
+
+                &:hover {
+                    color: $tmpcolor;
+                }
+
+            }
+        }
+
+        ul {
+            display: none;
+            background: #2f2f2f;
+            a {
+                padding-left: 25px;
+            }
+
+            ul {
+                background: #212121;
+                a {
+                    padding-left: 40px;
+                }
+            }
+
+            li {
+                
+            }
+        }
+    }
+}
+
+.has-sub {
+    display: block;
+    width: 35px;
+    height: 40px;
+    background: rgba($tmpcolor,0.6);
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    text-align: center;
+    line-height: 35px;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.4s;
+
+    &:hover {
+        background: rgba($tmpcolor, 0.9);
+    }
+
+    i {
+        transition: 0.4s;
+    }
+}
+
+
+.u-vmenu ul li span[data-option='off'] {
+    //background: url(../img/off.png) right center no-repeat;
+}
+
+.u-vmenu ul li span[data-option='on'] {
+    background: rgba($tmpcolor, 0.9);
+   i {
+       transform: rotate(180deg);
+   }
+}
+
+
+//widget
+.widget {
+    margin-bottom: 30px;
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding-left: 15px;
+
+        li {
+            a {
+                display: block;
+                padding: 5px;
+                border-bottom: 1px solid #eee;
+            }
+        }
+    }
+}
+
+.widget_search {
+    padding: 15px;
+    background-color: #000;
+}
+
+.widget-title {
+    padding: 15px;
+    background-color: #000;
+    color: $tmpcolor;
+}

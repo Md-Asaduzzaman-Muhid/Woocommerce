@@ -1,0 +1,31 @@
+{
+	"name": "instaHtmlQuickPack",
+	"version": "2",
+	"homepage": "http://understrap.com",
+	"authors": [
+		"Azizul Hoq <azizulhoq01@gmail.com>"
+	],
+	"description": "Html Quick Pack",
+	"moduleType": "globals",
+	"main": [
+		"sass/theme.scss"
+	],
+	"keywords": [
+		"bootstrap",
+		"underscores",
+		"wordpress",
+		"_s",
+		"sass"
+	],
+	"license": "GPL-2.0",
+	"ignore": [
+		"**/.*",
+		"test",
+		"tests"
+	],
+	"dependencies": {
+	},
+	"_source": "#",
+	"_target": "~0.6.2",
+	"_originalSource": "html"
+}

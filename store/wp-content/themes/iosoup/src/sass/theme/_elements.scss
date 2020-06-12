@@ -1,0 +1,115 @@
+.breadcrumb {
+    .breadcrumb-item {
+        float: none;
+        display: inline-block;
+        font-size: 14px;
+
+        &:first-child a {
+            color: $tmpcolor;
+        }
+
+        a {
+            color: $green;
+
+            &:hover {
+                color: $link-hover-color;
+            }
+        }
+    }
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    font: normal normal normal 12px/1 FontAwesome;
+}
+
+.btn-submit {
+    border: 0;
+    outline: 0;
+    background: $tmpcolor;
+    cursor: pointer;
+
+    &:hover {
+        background: darken($tmpcolor, 10%);
+    }
+}
+
+
+/*-------------------------------
+   	| 404 PAGE |
+---------------------------------*/
+.error-box {
+	max-width: 700px;
+	width: 100%;
+	padding: 30px;
+	margin: 0 auto;
+	background: #fff;
+	box-shadow: 0 0 5px 0 rgba(0,0,0,0.2);
+	text-align: center;
+	border-radius: 12px;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.error-text-left {
+	width: 220px;
+	height: 220px;
+	border-radius: 50%;
+	background: #f7f7f7;
+	color: #afafaf;
+	font-size: 18px;
+	padding-top: 45px;
+}
+
+.error-number {
+	font-size: 85px;
+    font-weight: bold;
+	line-height: 1;
+	text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+
+.error-text-right {
+	width: 390px;
+}
+
+.ops {
+	font-size: 40px;
+	font-weight: bold;
+	color: $tmpcolor;
+}
+
+/*-------------------------------
+   	| SEARCH PAGE |
+---------------------------------*/
+.content-search-item {
+    border-bottom: 1px dashed #b7b7b7;
+}
+
+.content-search-item h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/*-------------------------------
+   	| PAGINATION|
+---------------------------------*/
+.wp-pagenavi {
+    text-align: center;
+
+    a,span {
+        display: inline-block;
+        padding: 6px 8px;
+        border: 1px solid #e0e0e0;
+        line-height: 1;
+        margin: 3px;
+        min-width: 30px;
+
+        &.current, &:hover:not(.pages) {
+            background-color: $tmpcolor;
+            color: #fff;
+            border-color: $tmpcolor;
+        }
+    }
+}

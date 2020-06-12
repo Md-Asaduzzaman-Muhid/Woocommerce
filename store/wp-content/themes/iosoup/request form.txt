@@ -1,0 +1,122 @@
+//job application form
+<div class="row"> <div class="col-sm-6"> <div class="form-group"> <label for="your-name">Your Name</label> [text* your-name id:your-name class:form-control] </div></div><div class="col-sm-6"> <div class="form-group"> <label for="your-email">Your Email</label> [email* your-email id:your-email class:form-control] </div></div></div><div class="row"> <div class="col-sm-6"> <div class="form-group"> <label for="your-phone">Your Phone Number</label> [text your-phone id:your-phone class:form-control] </div></div><div class="col-sm-6"> <div class="form-group"> <label for="your-resume">Your Resume</label>[file* your-resume limit:2MB filetypes:doc|docx|pdf|jpg|png id:your-resume class:form-control] </div></div></div><div class="form-group"> <label for="your-msg">Your Message</label> [textarea* your-msg id:your-msg class:form-control][text job-title id:job-title class:d-none] </div><div class="row"> <div class="col-sm-6"><div class="form-group captcha-group"> [captchac captcha-798 class:captcha-img] [captchar captcha-798 class:form-control] </div></div><div class="col-sm-6">[submit class:btn class:btn-primary class:font-weight-bold class:btn-block "APPLY"] </div></div>
+
+//end
+
+
+<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="name">Name</label>
+							<input type="text" class="form-control" id="name">
+						</div>
+						<div class="form-group">
+							<label for="email">Email Address</label>
+							<input type="email" class="form-control" id="email">
+						</div>
+						<div class="form-group">
+							<label for="phone">Phone Number</label>
+							<input type="text" class="form-control" id="phone">
+						</div>
+						<div class="form-group">
+							<label for="qfor">Request quote for...</label>
+							<select class="form-control" id="qfor">
+								<option>Request quote for</option>
+								<option>Request quote for</option>
+								<option>Request quote for</option>
+							</select>
+						</div>
+					</div> <!-- /col-sm-6 -->
+
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="postaddress">Project Address</label>
+							<input type="text" class="form-control" id="postaddress">
+						</div>
+						<div class="form-group">
+							<label for="city">City</label>
+							<input type="text" class="form-control" id="city">
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+								<label for="qfor">Province</label>
+									<select class="form-control" id="qfor">
+										<option>Province</option>
+										<option>Province</option>
+										<option>Province</option>
+									</select>
+								</div>
+							</div> <!-- /col-sm-6 -->
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label for="postcode">Post code</label>
+									<input type="text" class="form-control" id="postcode">
+								</div>
+							</div> <!-- /col-sm-6 -->
+						</div> <!-- /row -->
+
+						<div class="form-group">
+							<label for="quote-date">Quote needed by...</label>
+							<input type="text" class="form-control" id="quote-date">
+							<input type="hidden" class="form-control" id="quote-date-val">
+						</div>
+
+					</div> <!-- /col-sm-6 -->
+
+				</div> <!-- /row -->
+
+				<div class="form-group">
+					<label for="comments">Comments</label>
+					<textarea class="form-control" name="" id="comments"></textarea>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group captcha-group">
+							
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<input type="submit" value="SUBMIT" class="btn btn-primary btn-block">
+						</div>
+					</div>
+				</div> <!-- /row -->
+
+
+
+------------ COMMON CONTACT FORM --------------
+<div class="row">
+<div class="col-sm-6">
+<div class="form-group">
+<label for="uName">Name <span class="required">*</span></label>
+[text* your-name id:uName class:form-control]
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">
+<label for="uEmail">Email Address <span class="required">*</span></label>
+[email* your-email id:uEmail class:form-control]
+</div>
+</div>
+
+<div class="col-sm-12">
+<div class="form-group">
+<label for="uMsg">Message <span class="required">*</span></label>
+[textarea* your-message id:uMsg class:form-control]
+</div>
+</div>
+
+<div class="col-sm-6">
+<div class="form-group captcha-group">
+[captchac captcha class:captcha-img] [captchar captcha class:form-control]
+</div>
+</div>
+
+<div class="col-sm-6">
+<div class="form-group">
+[submit class:btn-submit class:btn-block"Send Email"]
+</div>
+</div>
+</div>

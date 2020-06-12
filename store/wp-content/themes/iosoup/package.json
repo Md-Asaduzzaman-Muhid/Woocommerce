@@ -1,0 +1,57 @@
+{
+  "name": "instaHtmlQuickPack",
+  "version": "0.6.5",
+  "description": "Html Quick Pack",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "gulp copy-assets"
+  },
+  "engines": {
+    "npm": ">=2.1.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "#"
+  },
+  "keywords": [
+    "wordpress",
+    "theme",
+    "bootstrap"
+  ],
+  "author": "Azizul Hoq",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "#"
+  },
+  "homepage": "#",
+  "dependencies": {
+    "bootstrap": "4.3.1",
+    "browser-sync": "^2.18.12",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.7.0",
+    "gulp-clone": "^1.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-ignore": "^2.0.2",
+    "gulp-imagemin": "^3.3.0",
+    "gulp-merge": "^0.1.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-rimraf": "^0.2.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-sequence": "^0.4.6",
+    "gulp-sourcemaps": "2.6.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-watch": "^4.3.11",
+    "jquery": "3.2.1",
+    "merge2": "^1.1.0",
+    "popper.js": "^1.11.1",
+    "run-sequence": "^2.0.0"
+  },
+  "devDependencies": {
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-csscomb": "^3.0.8",
+    "gulp-filenames": "^4.0.1"
+  }
+}

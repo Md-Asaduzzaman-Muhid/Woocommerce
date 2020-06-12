@@ -1,0 +1,111 @@
+/*-------------------------
+	| FAQ CONTENT |
+--------------------------*/
+.accordion-wrapper {
+	.card {
+		background: transparent;
+		border: 0;
+	}
+
+	.card-body {
+		padding-left: 40px;
+		// font-size: 0.87rem;
+	}
+}
+
+.faq-title {
+	position: relative;
+	display: block;
+	padding: 10px 15px 10px 60px;
+	border-radius: 4px;
+	overflow: hidden;
+	color: #fff;
+	font-size: 16px;
+	margin-bottom: 5px;
+
+	background: #14191e;
+
+	i {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 40px;
+		height: 100%;
+		background: $tmpcolor;
+		// border-right: 1px solid #000;
+	}
+
+	&:before,
+	&:after {
+		content: "";
+		position: absolute;
+		background: #fff;
+		z-index: 15;
+		@extend .transition;
+	}
+
+	&:before {
+		width: 16px;
+		height: 2px;
+		left: 13px;
+		top: 50%;
+		margin-top: -1px;
+	}
+
+	&:after {
+		width: 2px;
+		height: 16px;
+		left: 20px;
+		top: 50%;
+		margin-top: -8px;
+	}
+
+	&[aria-expanded="true"] {
+		background: #888888;
+
+		margin-bottom: 0;
+
+		&:after {
+			height: 2px;
+			margin-top: -1px;
+		}
+	}
+
+	+ div {
+		padding: 15px 15px 15px 40px;
+		color: #fff;
+
+		p {
+			margin-bottom: 10px;
+		}
+	}
+
+	&:hover {
+		color: #fff;
+	}
+}
+
+//job
+.job-info {
+	text-align: right;
+	li {
+		display: inline-block;
+		padding: 7px 20px;
+		background: #ececec;
+		margin-right: 10px;
+		margin-bottom: 5px;
+		color: #404040;
+		text-align: center;
+		font-size: 0.9rem;
+
+		&.btn-apply {
+			background: $tmpcolor;
+			color: #fff;
+			cursor: pointer;
+			
+			&:hover {
+				background: darken($tmpcolor, 15%);
+			}
+		}
+	}
+}
