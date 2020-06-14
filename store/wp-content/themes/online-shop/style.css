@@ -3531,3 +3531,19 @@ body.modal-open{
 		display: none;
 	}
 }
+
+
+.woocommerce ul.products li.product{
+    box-shadow: 4px 4px 10px 4px rgba(0,0,0,0.25);
+
+}
+.site-header #woocommerce-product-search-field-0{
+	width: 65%;
+	border-radius: 0;
+    padding: 6px;
+}
+.site-header .header-ads-adv-search button{
+	padding: 5px;
+	background: #f73838;
+	color: #fff;
+}
