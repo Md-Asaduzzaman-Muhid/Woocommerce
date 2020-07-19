@@ -43,6 +43,8 @@ class Wpr_Options_Framework_Admin {
 			// Adds options menu to the admin bar
 			add_action( 'wp_before_admin_bar_render', array( $this, 'wpr_optionsframework_admin_bar' ) );
 
+			
+
 		}
 
     }
@@ -178,15 +180,52 @@ class Wpr_Options_Framework_Admin {
 		
 		wp_enqueue_script( 'wpr-bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', array( 'jquery'), Wpr_Options_Framework::VERSION );
 
-		// Enqueue custom option panel JS
-		wp_enqueue_script( 'options-custom', WPR_OPTIONS_FRAMEWORK_DIRECTORY . 'js/options-custom.js', array( 'jquery','wp-color-picker' ), Wpr_Options_Framework::VERSION );
+		//Ace js
+	  wp_enqueue_script( 'wpr-ace', WPR_OPTIONS_FRAMEWORK_DIRECTORY . 'js/ace-min-noconflict/ace.js', array( 'jquery' ), Wpr_Options_Framework::VERSION );
 
-		// Enqueue icon-picker js
+	  wp_enqueue_script( 'wpr-ace-theme-chrome', WPR_OPTIONS_FRAMEWORK_DIRECTORY . 'js/ace-min-noconflict/theme-chrome.js', array( 'jquery' ), Wpr_Options_Framework::VERSION );
+
+	  wp_enqueue_script( 'wpr-ace-mode-css', WPR_OPTIONS_FRAMEWORK_DIRECTORY . 'js/ace-min-noconflict/mode-css.js', array( 'jquery' ), Wpr_Options_Framework::VERSION );
+
+	  // Enqueue icon-picker js
 		wp_enqueue_script( 'icon-picker', WPR_OPTIONS_FRAMEWORK_DIRECTORY . 'js/jquery.fonticonpicker.min.js', array( 'jquery' ), Wpr_Options_Framework::VERSION );
 
-		$option_var = array( 'options_path' => WPR_OPTIONS_FRAMEWORK_DIRECTORY,
-										'ajax_url'  	 =>  admin_url( 'admin-ajax.php' ),
-									);
+		//Exit Intent
+		wp_enqueue_script( 'wpr-exit-intent', WPR_OPTIONS_FRAMEWORK_DIRECTORY . 'js/wpr-exit-intent.js', array( 'jquery' ), Wpr_Options_Framework::VERSION );
+
+		// Enqueue SweetAlert2 Style
+		wp_enqueue_style( 'Sweetalert2-css', WPR_OPTIONS_FRAMEWORK_DIRECTORY . 'css/sweetalert2.min.css', Wpr_Options_Framework::VERSION );
+
+		// Enqueue SweetAlert2 JS
+		wp_enqueue_script( 'Sweetalert2-js', WPR_OPTIONS_FRAMEWORK_DIRECTORY . 'js/sweetalert2.all.min.js', array( 'jquery'), Wpr_Options_Framework::VERSION );
+
+		// Enqueue custom option panel JS
+		wp_enqueue_script( 'options-custom', WPR_OPTIONS_FRAMEWORK_DIRECTORY . 'js/options-custom.js', array( 'jquery','wp-color-picker', 'Select2-js', 'wpr-ace', 'wpr-exit-intent', 'Sweetalert2-js' ), Wpr_Options_Framework::VERSION );
+
+		$option_var = array( 
+			'options_path' 			=> WPR_OPTIONS_FRAMEWORK_DIRECTORY,
+			'ajax_url'  	 		=>  admin_url( 'admin-ajax.php' ),
+			'view_demo'				=> __('View Demo', 'wprmenu'),
+			'preview_done' 			=> __('Preview Done', 'wprmenu'),
+			'loading_preview' 		=> __('Loading Preview', 'wprmenu'),
+			'import_demo'			=> __('Import Demo', 'wprmenu'),
+			'import_error'			=> __('Something went wrong', 'wprmenu'),
+			'please_wait'			=> __('Please Wait !', 'wprmenu'),
+			'please_reload'			=> __('Please reload the page by doing click the button below', 'wprmenu'),
+			'reload'				=> __('Reload', 'wprmenu'),
+			'import_error_title'	=> __('Oops...', 'wprmenu'),
+			'import_error'			=> __('Something went wrong', 'wprmenu'),
+			'import_done'			=> __('Import Done', 'wprmenu'),
+			'update_license_key'	=> __('Please Update Your License Key To Import Demo', 'wprmenu'),
+			'pro_message'			=> __('Import requires PRO version', 'wprmenu'),
+			'site_url'				=> get_site_url(),
+			'please_reload'			=> __('Please reload the page by doing click the button below', 'wprmenu'),
+			'reload'			=> __('Reload', 'wprmenu'),
+			'navigating_away' => __('Seems like navigating away', 'wprmenu'),
+			'confirm_message' => __('Are you sure to navigate away? Please save all the changes otherwise the recent changes will be reverted back', 'wprmenu'),
+			'pro_version_text' => __('Pro Version', 'wprmenu'),
+			'pro_version_upgrade_error' => __('This demo requires pro version to be activated', 'wprmenu'),
+		);
 		wp_localize_script( 'options-custom', 'wprOption' , $option_var );
 
 		// Inline scripts from options-interface.php
@@ -306,6 +345,12 @@ class Wpr_Options_Framework_Admin {
 
 		// Hook to run after validation
 		do_action( 'wpr_optionsframework_after_validate', $clean );
+		
+		if (isset($_COOKIE['wprmenu_live_preview']) && $_COOKIE['wprmenu_live_preview'] == 'yes' ) {
+    	unset($_COOKIE['wprmenu_live_preview']);
+    	setcookie('wprmenu_live_preview', null, -1, '/');
+		} 
+
 
 		return $clean;
 	}
@@ -376,5 +421,9 @@ class Wpr_Options_Framework_Admin {
 
 		$wp_admin_bar->add_menu( apply_filters( 'wpr_optionsframework_admin_bar', $args ) );
 	}
+
+
+
+	
 
 }

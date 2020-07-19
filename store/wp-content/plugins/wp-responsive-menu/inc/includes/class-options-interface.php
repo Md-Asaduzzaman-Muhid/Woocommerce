@@ -130,6 +130,12 @@ class Wpr_Options_Framework_Interface {
 				$output .= '<input id="' . esc_attr( $value['id'] ) . '" class="form-control" name="' . esc_attr( $option_name . '[' . $value['id'] . ']' ) . '" type="text" value="' . esc_attr( $val ) . '"' . $placeholder . ' />';
 				break;
 
+			// Code
+			case 'code':
+				$output .= '<div id="' . esc_attr( $value['id'] ) . '" name="' . esc_attr( $option_name . '[' . $value['id'] . ']' ) . '"></div>';
+				$output .= '<textarea name="' . esc_attr( $option_name . '[' . $value['id'] . ']' ) . '" id="' . esc_attr( $value['id'] ) . '_textarea" style="display: none">'.esc_attr( $val ).'</textarea>';
+				break;
+
 			// Password input
 			case 'password':
 				$output .= '<input id="' . esc_attr( $value['id'] ) . '" class="of-input" name="' . esc_attr( $option_name . '[' . $value['id'] . ']' ) . '" type="password" value="' . esc_attr( $val ) . '" />';
@@ -293,6 +299,13 @@ class Wpr_Options_Framework_Interface {
 				$output .= '</div>';
 			break;
 
+			// Showcase and demo import
+			case "showcase":
+				$output .= '<div class="wprmenu-showcase-wrapper">';
+				$output .= Wpr_Options_Framework_Interface::wprmenu_get_demodata();
+				$output .= '</div>';
+			break;
+
 			// Background
 			case 'background':
 
@@ -421,6 +434,73 @@ class Wpr_Options_Framework_Interface {
 		if ( Wpr_Options_Framework_Interface::wpr_optionsframework_tabs() != '' ) {
 			echo '</div>';
 		}
+	}
+
+
+	//Get demo data
+	static function wprmenu_get_demodata() {
+		
+		$items = get_transient('wprm_api_demo_items_list');
+		
+		if( ! $items )
+			$items = Wpr_Options_Framework_Interface::wprm_fetch_demo_items();
+
+
+		$data = '';
+		$class = '';
+		$data .= '<h6 class="wprmenu-demo">'.__( 'Easy Setup With Our Predefined Demo', 'wprmenu' ).'</h6>';
+		
+		if( is_object($items) ) {
+			
+			if( isset($items->Free) && !empty($items->Free) ) {
+				$data .= '<h6 class="wpr-demo-type">'.__('Free Demo', 'wprmenu').'</h6>';
+				$data .= '<ul class="wprmenu-demo-list">';
+				foreach( $items->Free as $key => $val ) {
+					$image_path = $val->image_path;
+					$data .= '<li class="wprmenu-data-list">';
+					$data .= '<div class="wprmenu-content image-overlay" >';
+					$data .= '<div data-demo-type="Free" data-demo-id="'.$val->demo_id.'"  data-settings="'.$val->settings.'" class="wprmenu-content-image" style="background-image: url('.$image_path.'); "></div>';
+					$data .= '<span class="view-demo"><a target="_blank" href="'.$val->demo_url.'">'.__('View Demo', 'wprmenu').'</a></span>';
+					$data .= '<span class="wprmenu-data import-demo">'.__('Import Demo', 'wprmenu').'</span>';
+					$data .= '</div>';
+					$data .= '</li>';
+				}
+				$data .= '</ul>';
+			}
+
+			if( isset($items->Pro) && !empty($items->Pro) ) {
+				$data .= '<h6 class="wpr-demo-type">'.__('Pro Demo', 'wprmenu').'</h6>';
+				$data .= '<ul class="wprmenu-demo-list">';
+				foreach( $items->Pro as $key => $val ) {
+					$image_path = $val->image_path;
+					$data .= '<li class="wprmenu-data-list">';
+					$data .= '<div class="wprmenu-content image-overlay">';
+					$data .= '<div data-demo-type="Pro"  class="wprmenu-content-image free-version" style="background-image: url('.$image_path.'); "></div>';
+					$data .= '<span class="view-demo"><a target="_blank" href="'.$val->demo_url.'">'.__('View Demo', 'wprmenu').'</a></span>';
+					$data .= '<span class="wprmenu-data import-demo">'.__('Import Requires Pro Version', 'wprmenu').'</span>';
+					$data .= '</div>';
+					$data .= '</li>';
+				}
+				$data .= '</ul>';
+			}
+		}
+		
+		return $data;
+	}
+
+	static function wprm_fetch_demo_items() {
+		$site_name = MG_WPRM_DEMO_SITE_URL;
+		$remoteLink = $site_name.'/wp-json/wprmenu-server/v1';
+
+		$data = wp_remote_get($remoteLink);
+		$items = array();
+
+		if( is_array($data) && isset($data['body']) ) {
+			$items = $data['body'];
+			$items = json_decode($items);
+			set_transient('wprm_api_demo_items_list', $items, 60 * 60 * 24);	
+		}
+		return $items;
 	}
 
 }

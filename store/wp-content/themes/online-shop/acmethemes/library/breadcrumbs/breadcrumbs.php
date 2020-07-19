@@ -205,7 +205,7 @@ class Breadcrumb_Trail {
 				// Wrap the item with its itemprop.
 				$item = ! empty( $matches )
 					? preg_replace( '/(<a.*?)([\'"])>/i', '$1$2 itemprop=$2item$2>', $item )
-					: sprintf( '<span itemprop="item">%s</span>', $item );
+					: preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i",'<$1$2>', sprintf( '<span itemprop="item">%s</span>', $item ));
 
 				// Add list item classes.
 				$item_class = 'trail-item';
@@ -217,10 +217,15 @@ class Breadcrumb_Trail {
 					$item_class .= ' trail-end';
 
 				// Create list item attributes.
-				$attributes = 'itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="' . $item_class . '"';
+				$attributes = ! empty( $matches )
+					? 'itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="' . $item_class . '"'
+					: 'class="' . $item_class . '"';
 
-				// Build the meta position HTML.
-				$meta = sprintf( '<meta itemprop="position" content="%s" />', absint( $item_position ) );
+
+				// Create list item attributes.
+				$meta = ! empty( $matches )
+					? sprintf( '<meta itemprop="position" content="%s" />', absint( $item_position ) )
+					: '';
 
 				// Build the list item.
 				$breadcrumb .= sprintf( '<%1$s %2$s>%3$s%4$s</%1$s>', tag_escape( $this->args['item_tag'] ),$attributes, $item, $meta );

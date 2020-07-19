@@ -120,5 +120,10 @@ require_once online_shop_file_directory('acmethemes/gutenberg/gutenberg-init.php
 require_once online_shop_file_directory('acmethemes/metabox/meta-icons.php');
 require_once online_shop_file_directory('acmethemes/metabox/metabox.php');
 
-/*themes info*/
-require_once online_shop_file_directory('acmethemes/at-theme-info/class-at-theme-info.php');
+/**
+ * Theme options page.
+ */
+if ( is_admin() ) {
+    require_once online_shop_file_directory('acmethemes/at-theme-info/class-at-theme-info.php');
+    require_once online_shop_file_directory('acmethemes/admin-notice/class-admin-notice-handler.php');
+}

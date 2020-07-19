@@ -191,6 +191,7 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'Online_Shop_Repe
 
 									case 'select':
 										$options = $field['options'];
+                                        $new_value = is_numeric($new_value) || is_string($new_value)?$new_value:'';
 										echo '<select  data-default="' . esc_attr( $default ) . '"  data-name="' . esc_attr( $key ) . '">';
 										foreach ( $options as $option => $val ) {
 											printf( '<option value="%s" %s>%s</option>', esc_attr( $option ), selected( $new_value, $option, false ), esc_attr( $val ) );
@@ -289,6 +290,7 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'Online_Shop_Repe
 
 										case 'select':
 											$options = $field['options'];
+                                            $new_value = is_numeric($new_value) || is_string($new_value)?$new_value:'';
 											echo '<select  data-default="' . esc_attr( $default ) . '"  data-name="' . esc_attr( $key ) . '">';
 											foreach ( $options as $option => $val ) {
 												printf( '<option value="%s" %s>%s</option>', esc_attr( $option ), selected( $new_value, $option, false ), esc_attr( $val ) );

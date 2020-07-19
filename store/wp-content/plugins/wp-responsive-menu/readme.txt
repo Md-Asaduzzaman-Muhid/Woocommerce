@@ -3,9 +3,8 @@ Contributors: sagarseth9,magnigenie,kshirod-patel
 Tags: WordPress Responsive Menu, Genesis responsive menu, Genesis Mobile Menu, Thesis Mobile Menu, Thesis Responsive Menu,  Mobile Menu, Responsive Menu Plugin, WP Responsive Menu, WordPress mobile menu
 Requires at least: 3.0
 Requires PHP: 5.4
-Tested up to: 4.9.6
-Stable tag: 3.0.4
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=sagar.seth9@gmail.com&item_name=WP%20Responsive%20Menu&return=http://magnigenie.com
+Tested up to: 5.3
+Stable tag: 3.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,6 +13,9 @@ WP Responsive Menu turns your WordPress menu to a highly customizable sliding re
 == Description ==
 
 WP Responsive Menu is a simple plugin that lets you add a highly customizable responsive menu to any WordPress site in no time at all and customization can all be done directly from the setting page, with no coding needed at all.
+
+= See it in action: =
+[Live Preview](http://demo.magnigenie.com/wp-responsive-menu-pro/menu-demo/)
 
 = Benefits: =
 * Get a nice looking slide menu in less than a minute.
@@ -33,18 +35,20 @@ WP Responsive Menu is a simple plugin that lets you add a highly customizable re
 * Allows to add social media icons to menu(PRO).
 * You can easily change the menu fonts with any custom/google fonts(PRO).
 * Change the sub menu and menu icons easily(PRO).
+* Plugin has the functionality where you can easily import predefined demo by doing a single click.
 * And much more coming soon...
 
 This plugin works out of box with any theme frameworks like genesis or thesis or any theme and it also works fine with multisite setups.
 
-= Important Notes =
-[Upgrade to PRO](http://magnigenie.com/wp-responsive-menu-pro/)  to avail better support and unrestricted access to WP Responsive Menu.
+= WP Responsive Menu Pro In action =
+[youtube https://www.youtube.com/watch?v=6_XqAfZoRJ8]
 
-For Quick support please check our [support forum](http://magnigenie.com/support/queries/wp-responsive-menu/) for WP Responsive Menu.
+= Important Notes =
+[Upgrade to PRO](http://magnigenie.com/wp-responsive-menu-pro/) to avail better support and unrestricted access to WP Responsive Menu.
 
 If you have any  suggestions for a new plugin, feel free to email us at info@magnigenie.com.
 
-[Click here](http://magnigenie.com/wp-responsive-menu-mobile-menu-plugin-wordpress/) to check the demo for free and pro version.
+[Click here](https://www.magnigenie.com/wp-responsive-menu-mobile-menu-plugin-wordpress/) to check the demo for free and pro version.
 
 == Installation ==
 1. Go to your admin area and select Plugins -> Add new from the menu.
@@ -59,14 +63,59 @@ If you have any  suggestions for a new plugin, feel free to email us at info@mag
 
 2. Appearance settings.
 
-3. Icons settings.
+3. Widget Menu settings.
 
-4. Frontend large screen view.
+4. Colors settings.
 
-5. Frontend PRO version view. Check out [the demo](http://magnigenie.com/wp-responsive-menu-mobile-menu-plugin-wordpress/)
+5. Fonts settings.
+
+6. Icons settings.
+
+7. Social settings.
+
+8. Demo import settings.
+
+9. Live Preview 
+
+10. Predefined demo
+
+11. Frontend screen view
+
+12. Frontend menu screen view
+
 
 == ChangeLog ==
 
+= Version 3.1.4 =
+
+* Changed core structure
+* Admin ui changed
+* css and js optimized
+* Changed live preview functionality
+* Fixed issue with demo import
+
+= Version 3.1.3 =
+
+* Fixed css issue for html overflow property
+
+= Version 3.1.2 =
+
+* Fixed issue for filter
+* Fixed iPhone issue for not showing menus
+
+= Version 3.1.1 =
+
+* Fixed issue for constant
+
+= Version 3.1 =
+
+* Added developer hooks for before menu element and after menu element
+* Added custom css editor
+* Added WYSIWYG editor for before menu content and after menu content
+* Option added for menu bar height
+* Fixed option issue for push menu
+* Code optimized
+* Css optimized
 
 = Version 3.0.4 =
 
@@ -164,6 +213,6 @@ If you have any  suggestions for a new plugin, feel free to email us at info@mag
 
 == Upgrade Notice ==
 
-= Version 3.0.2 =
+= Version 3.1.4 =
 
 * New update is available.

@@ -105,7 +105,8 @@ class WPCF7_Mail {
 		);
 
 		$components = apply_filters( 'wpcf7_mail_components',
-			$components, wpcf7_get_current_contact_form(), $this );
+			$components, wpcf7_get_current_contact_form(), $this
+		);
 
 		if ( ! $send ) {
 			return $components;
@@ -213,7 +214,7 @@ function wpcf7_mail_replace_tags( $content, $args = '' ) {
 			$replaced_tags = $line->get_replaced_tags();
 
 			if ( empty( $replaced_tags )
-			or array_filter( $replaced_tags ) ) {
+			or array_filter( $replaced_tags, 'strlen' ) ) {
 				$content[$num] = $replaced;
 			} else {
 				unset( $content[$num] ); // Remove a line.
@@ -340,11 +341,14 @@ class WPCF7_MailTaggedText {
 
 				$replaced = apply_filters(
 					"wpcf7_mail_tag_replaced_{$type}", $replaced,
-					$submitted, $html, $mail_tag );
+					$submitted, $html, $mail_tag
+				);
 			}
 
-			$replaced = apply_filters( 'wpcf7_mail_tag_replaced', $replaced,
-				$submitted, $html, $mail_tag );
+			$replaced = apply_filters(
+				'wpcf7_mail_tag_replaced', $replaced,
+				$submitted, $html, $mail_tag
+			);
 
 			$replaced = wp_unslash( trim( $replaced ) );
 
@@ -353,7 +357,8 @@ class WPCF7_MailTaggedText {
 		}
 
 		$special = apply_filters( 'wpcf7_special_mail_tags', null,
-			$mail_tag->tag_name(), $html, $mail_tag );
+			$mail_tag->tag_name(), $html, $mail_tag
+		);
 
 		if ( null !== $special ) {
 			$this->replaced_tags[$tag] = $special;
@@ -368,7 +373,11 @@ class WPCF7_MailTaggedText {
 
 		foreach ( $original as $key => $value ) {
 			if ( preg_match( '/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $value ) ) {
-				$original[$key] = mysql2date( $format, $value );
+				$datetime = date_create( $value, wp_timezone() );
+
+				if ( false !== $datetime ) {
+					$original[$key] = wp_date( $format, $datetime->getTimestamp() );
+				}
 			}
 		}
 

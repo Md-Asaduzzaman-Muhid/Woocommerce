@@ -44,4 +44,29 @@ jQuery(document).ready(function ($) {
         //Toggle open/close on the <div> after the <h3>, opening it if not open.
         $(e.target).next('div').slideToggle();
     });
+
+    /*image size options*/
+    jQuery(".acme-set-image").click(function() {
+
+        var acme_set_image = jQuery(this);
+
+        jQuery.ajax({
+            type      : "GET",
+            data      : {
+                action: 'acme_demo_setup_before_import'
+            },
+            url       : at_theme_info_object.ajaxurl,
+            beforeSend: function (data, settings) {
+                jQuery('.acme-set-image').append('<div id="temp_load" style="text-align:center"><img src="' + at_theme_info_object.template_directory + '/acmethemes/at-theme-info/images/ajax-loader.gif" /></div>');
+            },
+            success   : function (data) {
+                jQuery("#temp_load").remove();
+                acme_set_image.remove();
+                /* Remove loading gif */
+            },
+            error     : function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR + " :: " + textStatus + " :: " + errorThrown);
+            }
+        });
+    });
 });

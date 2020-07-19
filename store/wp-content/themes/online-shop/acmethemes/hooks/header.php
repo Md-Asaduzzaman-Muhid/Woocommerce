@@ -406,7 +406,6 @@ if ( ! function_exists( 'online_shop_header' ) ) :
 	                            }
 	                            ?>
                             </div>
-
                         </div>
                         <div class="responsive-slick-menu clearfix"></div>
                     </nav>
@@ -454,3 +453,14 @@ if ( ! function_exists( 'online_shop_before_content' ) ) :
     }
 endif;
 add_action( 'online_shop_action_after_header', 'online_shop_before_content', 10 );
+
+
+/*Add description to menu*/
+function online_shop_add_description_to_menu($item_output, $item, $depth, $args) {
+    if ($args ->theme_location ==='primary' && strlen($item->description) > 0 ) {
+        // append description after link
+        $item_output .= sprintf('<span class="at-menu-desc">%s</span>', esc_html($item->description));
+    }
+    return $item_output;
+}
+add_filter('walker_nav_menu_start_el', 'online_shop_add_description_to_menu', 10, 4);

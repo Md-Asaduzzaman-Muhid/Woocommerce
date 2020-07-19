@@ -13,6 +13,10 @@ add_filter( 'wpr_of_sanitize_menusort', 'sanitize_text_field' );
 
 add_filter( 'wpr_of_sanitize_text', 'sanitize_text_field' );
 
+/* Code */
+
+add_filter( 'wpr_of_sanitize_code', 'sanitize_text_field' );
+
 /* Password */
 
 add_filter( 'wpr_of_sanitize_password', 'sanitize_text_field' );

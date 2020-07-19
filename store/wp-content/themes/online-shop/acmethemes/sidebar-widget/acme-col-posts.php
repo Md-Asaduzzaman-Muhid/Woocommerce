@@ -78,7 +78,7 @@ if ( ! class_exists( 'Online_Shop_Posts_Col' ) ) {
 			        $post_advanced_options = online_shop_post_advanced_options();
 			        foreach ( $post_advanced_options as $key => $value ){
 				        ?>
-                        <option value="<?php echo esc_attr( $key )?>" <?php selected( $key, $post_advanced_option ); ?>><?php echo esc_attr( $value );?></option>
+                        <option value="<?php echo esc_attr( $key )?>" <?php selected( $key, $post_advanced_option ); ?>><?php echo esc_html( $value );?></option>
 				        <?php
 			        }
 			        ?>
@@ -143,7 +143,7 @@ if ( ! class_exists( 'Online_Shop_Posts_Col' ) ) {
 			        $online_shop_widget_column_numbers = online_shop_widget_column_number();
 			        foreach ( $online_shop_widget_column_numbers as $key => $value ){
 				        ?>
-                        <option value="<?php echo esc_attr( $key )?>" <?php selected( $key, $column_number ); ?>><?php echo esc_attr( $value );?></option>
+                        <option value="<?php echo esc_attr( $key )?>" <?php selected( $key, $column_number ); ?>><?php echo esc_html( $value );?></option>
 				        <?php
 			        }
 			        ?>
@@ -158,7 +158,7 @@ if ( ! class_exists( 'Online_Shop_Posts_Col' ) ) {
 			        $online_shop_widget_display_types = online_shop_widget_display_type();
 			        foreach ( $online_shop_widget_display_types as $key => $value ){
 				        ?>
-                        <option value="<?php echo esc_attr( $key )?>" <?php selected( $key, $display_type ); ?>><?php echo esc_attr( $value );?></option>
+                        <option value="<?php echo esc_attr( $key )?>" <?php selected( $key, $display_type ); ?>><?php echo esc_html( $value );?></option>
 				        <?php
 			        }
 			        ?>
@@ -173,7 +173,7 @@ if ( ! class_exists( 'Online_Shop_Posts_Col' ) ) {
 			        $online_shop_post_orderby = online_shop_post_orderby();
 			        foreach ( $online_shop_post_orderby as $key => $value ){
 				        ?>
-                        <option value="<?php echo esc_attr( $key )?>" <?php selected( $key, $orderby ); ?>><?php echo esc_attr( $value );?></option>
+                        <option value="<?php echo esc_attr( $key )?>" <?php selected( $key, $orderby ); ?>><?php echo esc_html( $value );?></option>
 				        <?php
 			        }
 			        ?>
@@ -188,7 +188,7 @@ if ( ! class_exists( 'Online_Shop_Posts_Col' ) ) {
 			        $online_shop_post_order = online_shop_post_order();
 			        foreach ( $online_shop_post_order as $key => $value ){
 				        ?>
-                        <option value="<?php echo esc_attr( $key )?>" <?php selected( $key, $order ); ?>><?php echo esc_attr( $value );?></option>
+                        <option value="<?php echo esc_attr( $key )?>" <?php selected( $key, $order ); ?>><?php echo esc_html( $value );?></option>
 				        <?php
 			        }
 			        ?>
@@ -204,7 +204,7 @@ if ( ! class_exists( 'Online_Shop_Posts_Col' ) ) {
 			        $online_shop_adv_link_options = online_shop_adv_link_options();
 			        foreach ( $online_shop_adv_link_options as $key => $value ){
 				        ?>
-                        <option value="<?php echo esc_attr( $key )?>" <?php selected( $key, $view_all_option ); ?>><?php echo esc_attr( $value );?></option>
+                        <option value="<?php echo esc_attr( $key )?>" <?php selected( $key, $view_all_option ); ?>><?php echo esc_html( $value );?></option>
 				        <?php
 			        }
 			        ?>

@@ -71,6 +71,21 @@ jQuery( document ).ready( function( $ ) {
 			return;
 		classie.toggle( this, 'active' );
 		$(this).find('div.hamburger').toggleClass('is-active');
+
+		if( $(this).hasClass('active') ) {
+			$('html').addClass('wprmenu-body-fixed');
+			if( wprmenu.enable_overlay == '1' ) {
+				$('div.wprm-wrapper').find('.wprm-overlay').addClass('active');
+			}
+			
+		}
+		else {
+			$('html').removeClass('wprmenu-body-fixed');
+			if( wprmenu.enable_overlay == '1' ) {
+				$('div.wprm-wrapper').find('.wprm-overlay').removeClass('active');
+			}
+		}
+
 		// For the right side body push
 		if (!$(this).hasClass('normalslide') && $(this).hasClass('left')) {
 			doc_width = $(document).width()*(wprmenu.menu_width/100);

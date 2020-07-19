@@ -22,9 +22,6 @@ if ( ! class_exists( 'Online_Shop_Theme_Info' ) ) {
             $this->config = $config;
             $this->prepare_class();
 
-            /* activation notice */
-            add_action( 'load-themes.php', array( $this, 'activation_admin_notice' ) );
-
             /*admin menu*/
             add_action( 'admin_menu', array( $this, 'at_admin_menu' ) );
 
@@ -33,25 +30,6 @@ if ( ! class_exists( 'Online_Shop_Theme_Info' ) ) {
 
             /* ajax callback for dismissable required actions */
             add_action( 'wp_ajax_at_theme_info_update_recommended_action', array( $this, 'update_recommended_action_callback' ) );
-        }
-
-        /**
-         * Adds an admin notice upon successful activation.
-         */
-        public function activation_admin_notice() {
-            global $pagenow;
-            if ( is_admin() && ( 'themes.php' == $pagenow ) && isset( $_GET['activated'] ) ) {
-                add_action( 'admin_notices', array( $this, 'at_theme_info_welcome_admin_notice' ), 99 );
-            }
-        }
-
-        /**
-         * Display an admin notice linking to the about page
-         */
-        public function at_theme_info_welcome_admin_notice() {
-            echo '<div class="updated notice is-dismissible">';
-            echo ( '<p>' . sprintf( __('Welcome! Thank you for choosing %1$s! To fully take advantage of the best our theme can offer please make sure you visit our %2$swelcome page%3$s.','online-shop'), $this->theme_name, '<a href="' . esc_url( admin_url( 'themes.php?page=' . $this->theme_slug . '-info' ) ) . '">', '</a>' ) . '</p><p><a href="' . esc_url( admin_url( 'themes.php?page=' . $this->theme_slug . '-info' ) ) . '" class="button" style="text-decoration: none;">' . sprintf( __('Get started with %s','online-shop'), $this->theme_name ) . '</a></p>' );
-            echo '</div>';
         }
 
         /**
@@ -232,7 +210,15 @@ if ( ! class_exists( 'Online_Shop_Theme_Info' ) ) {
                 if ( ! empty( $welcome_content ) ) {
                     echo '<div class="about-text">' . wp_kses_post( $welcome_content ) . '</div>';
                 }
-
+                $notice_nag = get_option( 'online_shop_admin_notice_welcome' );
+                if ( ! $notice_nag ) {
+                    echo '<div class="at-gsm-notice">
+                        <small class="plugin-install-notice">'.esc_html__('Clicking the button below will install and activate the Acme Demo Setup and Advanced Import plugins.','online-shop').'</small>
+                        <a class="at-gsm-btn button button-primary button-hero" href="#" data-name="" data-slug="" aria-label="'.esc_html__('Get started with Online Shop','online-shop').'">
+                         '.esc_html__('Get started with Online Shop','online-shop').'                   
+                         </a>
+                    </div>';
+                }
                 echo '<a href="https://www.acmethemes.com/" target="_blank" class="wp-badge epsilon-info-logo"></a>';
 
                 /*quick links*/
@@ -366,7 +352,6 @@ if ( ! class_exists( 'Online_Shop_Theme_Info' ) ) {
                     $path = false;
                 }
             }
-
             if ( file_exists( $path ) ) {
                 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
@@ -374,7 +359,6 @@ if ( ! class_exists( 'Online_Shop_Theme_Info' ) ) {
 
                 return array( 'status' => is_plugin_active( $slug . '/' . $slug . '.php' ), 'needs' => $needs );
             }
-
             return array( 'status' => false, 'needs' => 'install' );
         }
 
@@ -461,9 +445,6 @@ if ( ! class_exists( 'Online_Shop_Theme_Info' ) ) {
                             $saved_recommended_actions[ $id ] == false ) {
                             $hidden = true;
                         }
-                        if ( $hidden ) {
-                            //continue;
-                        }
                         $done = '';
                         if ( $check ) {
                            $done = 'done';
@@ -510,7 +491,6 @@ if ( ! class_exists( 'Online_Shop_Theme_Info' ) ) {
 
                                     break;
                             }
-
                             ?>
                             <p class="plugin-card-<?php echo esc_attr( $action_value['plugin_slug'] ) ?> action_button <?php echo ( $active['needs'] !== 'install' && $active['status'] ) ? 'active' : '' ?>">
                                 <a data-slug="<?php echo esc_attr( $action_value['plugin_slug'] ) ?>"
@@ -563,9 +543,9 @@ if ( ! class_exists( 'Online_Shop_Theme_Info' ) ) {
                 ) );
                 set_transient( 'at_theme_info_plugin_information_transient_' . $slug, $call_api, 30 * MINUTE_IN_SECONDS );
             }
-
             return $call_api;
         }
+
         public function get_plugin_icon( $arr ) {
 
             if ( ! empty( $arr['svg'] ) ) {
@@ -580,6 +560,7 @@ if ( ! class_exists( 'Online_Shop_Theme_Info' ) ) {
 
             return $plugin_icon_url;
         }
+
         public function recommended_plugins() {
             $recommended_plugins = $this->config['recommended_plugins'];
 
@@ -980,7 +961,7 @@ if ( ! class_exists( 'Online_Shop_Theme_Info' ) ) {
          */
         public function style_and_scripts( $hook_suffix ) {
 
-            // this is needed on all admin pages, not just the about page, for the badge action count in the wordpress main sidebar
+            // this is needed on all admin pages, not just the about page, for the badge action count in the WordPress main sidebar
             wp_enqueue_style( 'at-theme-info-css', get_template_directory_uri() . '/acmethemes/at-theme-info/css/at-theme-info.css' );
 
             if ( 'appearance_page_' . $this->theme_slug . '-info' == $hook_suffix ) {
@@ -1138,14 +1119,17 @@ $config = array(
 
     // Plugins array.
     'recommended_plugins'        => array(
-        'acme-demo-setup' => array(
-            'slug' => 'acme-demo-setup'
+        'advanced-import' => array(
+            'slug' => 'advanced-import'
         ),
         'woocommerce' => array(
             'slug' => 'woocommerce'
         ),
         'yith-woocommerce-wishlist' => array(
 	        'slug' => 'yith-woocommerce-wishlist'
+        ),
+        'gutentor' => array(
+            'slug' => 'gutentor'
         )
     ),
 
@@ -1240,7 +1224,6 @@ $config = array(
     ),
 
     // Free vs pro array.
-	// Free vs pro array.
     'free_pro' => array(
 	    array(
 		    'title'=> esc_html__( 'Custom Widgets', 'online-shop' ),

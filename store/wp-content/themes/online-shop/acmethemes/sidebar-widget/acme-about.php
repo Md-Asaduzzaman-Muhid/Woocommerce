@@ -158,7 +158,7 @@ if ( ! class_exists( 'Online_Shop_About' ) ) {
 					$online_shop_about_column_numbers = online_shop_widget_column_number();
 					foreach ( $online_shop_about_column_numbers as $key => $value ) {
 						?>
-                        <option value="<?php echo esc_attr( $key ) ?>" <?php selected( $key, $column_number ); ?>><?php echo esc_attr( $value ); ?></option>
+                        <option value="<?php echo esc_attr( $key ) ?>" <?php selected( $key, $column_number ); ?>><?php echo esc_html( $value ); ?></option>
 						<?php
 					}
 					?>
@@ -173,7 +173,7 @@ if ( ! class_exists( 'Online_Shop_About' ) ) {
 					$online_shop_single_item_link_options = online_shop_adv_link_options();
 					foreach ( $online_shop_single_item_link_options as $key => $value ){
 						?>
-                        <option value="<?php echo esc_attr( $key )?>" <?php selected( $key, $single_item_link_option ); ?>><?php echo esc_attr( $value );?></option>
+                        <option value="<?php echo esc_attr( $key )?>" <?php selected( $key, $single_item_link_option ); ?>><?php echo esc_html( $value );?></option>
 						<?php
 					}
 					?>
@@ -188,7 +188,7 @@ if ( ! class_exists( 'Online_Shop_About' ) ) {
 					$online_shop_widget_display_types = online_shop_widget_display_type();
 					foreach ( $online_shop_widget_display_types as $key => $value ){
 						?>
-                        <option value="<?php echo esc_attr( $key )?>" <?php selected( $key, $display_type ); ?>><?php echo esc_attr( $value );?></option>
+                        <option value="<?php echo esc_attr( $key )?>" <?php selected( $key, $display_type ); ?>><?php echo esc_html( $value );?></option>
 						<?php
 					}
 					?>
@@ -209,7 +209,7 @@ if ( ! class_exists( 'Online_Shop_About' ) ) {
 					$online_shop_adv_link_options = online_shop_adv_link_options();
 					foreach ( $online_shop_adv_link_options as $key => $value ){
 						?>
-                        <option value="<?php echo esc_attr( $key )?>" <?php selected( $key, $view_all_option ); ?>><?php echo esc_attr( $value );?></option>
+                        <option value="<?php echo esc_attr( $key )?>" <?php selected( $key, $view_all_option ); ?>><?php echo esc_html( $value );?></option>
 						<?php
 					}
 					?>

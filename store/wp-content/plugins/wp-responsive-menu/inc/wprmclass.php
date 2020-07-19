@@ -1,12 +1,12 @@
 <?php
-class MgWprm {
+class WP_Responsive_Menu {
 
 	protected $options = '';
 
-	public $translatables = [
+	public $translatables = array(
   	'search_box_text',
     'bar_title'
-  ];
+  );
 
 	/**
 	* Bootstraps the class and hooks required actions & filters.
@@ -19,12 +19,33 @@ class MgWprm {
 		$this->options = get_option( 'wprmenu_options' );
 
 		add_action( 'plugins_loaded', array($this, 'wprmenu_register_strings'));
+
+		add_action( 'wp_ajax_wpr_live_update', array($this, 'wpr_live_update'));
+
+		add_action( 'wp_footer', array($this, 'wpr_custom_css') );
+
+		add_action( 'wp_ajax_wprmenu_import_data', array($this, 'wprmenu_import_data') );
+
+		add_action( 'wp_ajax_wpr_get_transient_from_data', array($this, 'wpr_get_transient_from_data') );
 	}
 
 	public function option( $option ){
-		if( isset( $this->options[$option] ) )
-			return $this->options[$option];
-		return '';
+		if( isset($_COOKIE['wprmenu_live_preview']) 
+			&& $_COOKIE['wprmenu_live_preview'] == 'yes' ) {
+			$check_transient = get_transient('wpr_live_settings');
+
+			if( $check_transient ) {
+				if( isset( $check_transient[$option] ) 
+					&& $check_transient[$option] != '' ) {
+						return $check_transient[$option];
+				}
+			}
+		}
+		else {
+			if( isset( $this->options[$option] ) && $this->options[$option] != '' )
+				return $this->options[$option];
+				return '';
+		}
 	}
 
 	public function wprmenu_register_strings() {
@@ -91,6 +112,10 @@ class MgWprm {
 			$border_bottom_color = $this->hex2rgba($this->option("menu_border_bottom"), $this->option("menu_border_bottom_opacity"));
 			$menu_title_font = $this->option('menu_title_size') == '' ? '20' : $this->option('menu_title_size');
 
+			$inlinecss .= 'html body div.wprm-wrapper {
+				overflow: scroll;
+			}';
+
 			//manu background image
 			if( $this->option('menu_bg') != '' ) :
 				$inlinecss .= '#mg-wprm-wrap {
@@ -98,6 +123,11 @@ class MgWprm {
 					background-size: '.$this->option("menu_bg_size").';
 					background-repeat: '.$this->option("menu_bg_rep").';
 			}';
+			endif;
+
+			if( $this->option('enable_overlay') == '1' ) :
+				$overlay_bg_color = $this->hex2rgba($this->option("menu_bg_overlay_color"), $this->option("menu_background_overlay_opacity"));
+				$inlinecss .= 'html body div.wprm-overlay{ background: '.$overlay_bg_color .' }';
 			endif;
 
 			if( $this->option('menu_border_bottom_show') == 'yes' ):
@@ -233,6 +263,39 @@ class MgWprm {
 					}
 				';
 			endif;
+
+			if( $this->option('menu_icon_type') == 'default' ) :
+				$menu_padding = $this->option("header_menu_height");
+				$menu_padding = intval($menu_padding);
+
+				if( $menu_padding > 50 ) {
+					$menu_padding = $menu_padding - 27;
+					$menu_padding = $menu_padding / 2;
+					$top_position = $menu_padding + 30;
+
+					$inlinecss .= 'html body div#wprmenu_bar {
+						padding-top: '.$menu_padding.'px;
+						padding-bottom: '.$menu_padding.'px;
+					}';
+
+					if( $this->option('menu_type') == 'default' ) {
+						$inlinecss .= '.wprmenu_bar div.wpr_search form {
+							top: '.$top_position.'px;
+						}';
+					}
+				}
+				
+				$inlinecss .= 'html body div#wprmenu_bar {
+					height : '.$this->option("header_menu_height").'px;
+				}';
+			endif;
+
+			if( $this->option('menu_type') == 'default'  ) :
+				$inlinecss .= '#mg-wprm-wrap.cbp-spmenu-left, #mg-wprm-wrap.cbp-spmenu-right, #mg-widgetmenu-wrap.cbp-spmenu-widget-left, #mg-widgetmenu-wrap.cbp-spmenu-widget-right {
+					top: '.$this->option("header_menu_height").'px !important;
+				}';
+			endif;
+
 			if( $this->option("menu_symbol_pos") == 'left' ) :
 				$inlinecss .= '
 					.wprmenu_bar .hamburger {
@@ -266,8 +329,11 @@ class MgWprm {
 
 	/**
 	*
-	* Add necessary js and css files for the menu
+	* Add necessary js and css for our wp responsive menu
 	*
+	* @since 1.0.2
+	* @param blank
+	* @return array
 	*/	
 	public function wprm_enque_scripts() {
 		//hamburger menu icon style
@@ -291,12 +357,13 @@ class MgWprm {
 		wp_enqueue_script('wprmenu.js', plugins_url( '/wp-responsive-menu/js/wprmenu.js'), array( 'jquery', 'touchSwipe' ), '1.0' );
 		
 		$wpr_options = array(
-		 		'zooming' 		=> $this->option('zooming'),
-		 		'from_width' 	=> $this->option('from_width'),
-		 		'push_width' 	=> $this->option('menu_max_width'),
-		 		'menu_width' 	=> $this->option('how_wide'),
-		 		'parent_click' 	=> $this->option('parent_click'),
-		 		'swipe' 		=> $this->option('swipe'),
+		 		'zooming' 				=> $this->option('zooming'),
+		 		'from_width' 			=> $this->option('from_width'),
+		 		'push_width' 			=> $this->option('menu_max_width'),
+		 		'menu_width' 			=> $this->option('how_wide'),
+		 		'parent_click' 		=> $this->option('parent_click'),
+		 		'swipe' 					=> $this->option('swipe'),
+		 		'enable_overlay' 	=> $this->option('enable_overlay'),
 		 	);
 		//Localize necessary variables
 		wp_localize_script( 'wprmenu.js', 'wprmenu', $wpr_options );
@@ -304,8 +371,11 @@ class MgWprm {
 
 	/**
 	*
-	* Wordpress default search form
+	* WordPress deafult search form
 	*
+	* @since 3.0.4
+	* @param blank
+	* @return html
 	*/
 	public function wpr_search_form() {
 		$search_placeholder = $this->option('search_box_text');
@@ -316,8 +386,11 @@ class MgWprm {
 
 	/**
 	*
-	* Function to show responsive menu with custom markup
+	* Outputs Responsive Menu Html
 	*
+	* @since 1.0
+	* @param empty
+	* @return html
 	*/	
 	public function wprmenu_menu() {
 		if( $this->option('enabled') ) :
@@ -327,7 +400,15 @@ class MgWprm {
 			$menu_title = function_exists('pll__') ? pll__($menu_title) : $menu_title;
 
 			$menu_icon_animation = $this->option('menu_icon_animation') != '' ? $this->option('menu_icon_animation') : 'hamburger--slider'; 
+			?>
+
+			<div class="wprm-wrapper">
+			<?php
+			if( $this->option('enable_overlay') == '1' ) : ?>
+				<div class="wprm-overlay"></div>
+			<?php endif; ?>
 			
+			<?php
 			if( $this->option('menu_type') == 'custom' ): ?>
 				<div class="wprmenu_bar custMenu <?php echo $this->option('slide_type'); echo ' '.$this->option('position'); ?>">
 					<div id="custom_menu_icon" class="hamburger <?php echo $menu_icon_animation; ?>">
@@ -338,6 +419,7 @@ class MgWprm {
 				</div>
 			<?php else: ?>
 				<div id="wprmenu_bar" class="wprmenu_bar <?php echo $this->option('slide_type'); echo ' '.$this->option('position'); ?>">
+
 					<div class="hamburger <?php echo $menu_icon_animation; ?>">
   						<span class="hamburger-box">
     						<span class="hamburger-inner"></span>
@@ -367,7 +449,30 @@ class MgWprm {
 						<?php if( $this->option('bar_logo') ) echo '<img class="bar_logo" alt="logo" src="'.$this->option('bar_logo').'"/>' ?>
 					</div>
 				<?php endif; ?>
+
+				<?php
+				/**
+				*
+				* After Menu Header Hook
+				*
+				* @since 3.1
+				*/
+				do_action('wpr_after_menu_bar'); 
+				?>
+
 				<ul id="wprmenu_menu_ul">
+					
+
+					<?php
+					/* Content Before Menu */
+					if( $this->option('content_before_menu_element') !== '' ) {
+						$content_before_menu_elements = preg_replace('/\\\\/', '', $this->option('content_before_menu_element'));
+
+						echo '<li class="wprm_before_menu_content">'. $content_before_menu_elements . '</li>';
+					}
+					?>
+
+
 					<?php
 					$search_position = $this->option('order_menu_items') != '' ? $this->option('order_menu_items') : 'Menu,Search,Social';
 					$search_position = explode(',', $search_position);
@@ -397,10 +502,172 @@ class MgWprm {
 						?>
 					<?php
 					endforeach;
-					 ?>	
+					 ?>
+
+					<?php
+					 /* After Menu Element */
+					 if( $this->option('content_after_menu_element') !== '' ) {
+						$content_after_menu_element = preg_replace('/\\\\/', '', $this->option('content_after_menu_element'));
+
+						echo '<li class="wprm_after_menu_content">'. $content_after_menu_element . '</li>';
+					}
+					?>
+
+					
 				</ul>
+
+				<?php
+				/**
+				*
+				* After Menu Container Hook
+				*
+				* @since 3.1
+				*/
+				do_action('wpr_after_menu_container'); 
+				?>
+				
+				</div>
 			</div>
 			<?php
 		endif;
+	}
+
+
+	/**
+	*
+	* Show custom css from the plugin settings
+	*
+	* @since 3.1
+	* @param empty
+	* @return string
+	*/
+	public function wpr_custom_css() {
+		$wpr_custom_css = $this->option('wpr_custom_css');
+
+		if( !empty($wpr_custom_css) ) :
+		?>
+		<style type="text/css">
+		<?php
+			echo '/* WPR Custom CSS */' . "\n";
+    	echo $wpr_custom_css . "\n";
+    ?>
+		</style>
+		<?php
+		endif;
+	}
+
+	/**
+	*
+	* Save settings into transient
+	*
+	* @since 3.1
+	* @param empty
+	* @return array
+	*/
+	public function wpr_live_update() {
+		if( isset($_POST['wprmenu_options']) ) {
+			set_transient('wpr_live_settings', $_POST['wprmenu_options'], 60 * 60 * 24);
+		}
+		wp_die();
+	}
+
+	/**
+	*
+	* Get demo settings from the file
+	*
+	* @since 3.1
+	* @param empty
+	* @return json object
+	*/
+	public function wprmenu_import_data() {
+		
+		$response = 'error';
+		$menu = '';
+
+		if( $this->option('menu') ) {
+			$menu = $this->option('menu');
+		}
+		
+		if( isset($_POST) ) {
+			$settings_id = isset($_POST['settings_id']) ? $_POST['settings_id'] : '';
+			$demo_type = isset($_POST['demo_type']) ? $_POST['demo_type'] : '';
+
+			$demo_id = isset($_POST['demo_id']) ? $_POST['demo_id'] : '';
+
+			if( $settings_id !== '' 
+				&& $demo_type !== '' 
+				&& $demo_id !== ''  ) {
+				$site_name = MG_WPRM_DEMO_SITE_URL;
+				$remoteLink = $site_name.'/wp-json/wprmenu-server/v2/type='.$demo_type.'/demo_name='.$demo_id.'/settings_id='.$settings_id;
+
+				$content = wp_remote_get($remoteLink);
+
+				if( is_array($content) 
+					&& isset($content['response']) 
+					&& $content['response']['code'] == 200  ) {
+					
+					$content = $content['body'];
+					$items = json_decode($content, true);
+					
+					if( is_array($items) ) {
+						$items['menu'] = $menu;
+					}
+
+					$content = maybe_serialize($items);
+
+					if( $content ) {
+						$response = 'success';
+
+						global $wpdb;
+				
+						$wpdb->update(
+							$wpdb->prefix.'options',
+							array(
+								'option_value' => $content,
+							),
+							array(
+								'option_name' => 'wprmenu_options',
+							)
+						);
+					}
+					else {
+						$response = 'error';
+					}
+				}
+				else {
+					$response = 'error';
+				}
+			}
+			else {
+				$response = 'error';
+			}
+		}
+		else {
+			$response = 'error';
+		}
+		echo json_encode( array('status' => $response) );		
+		wp_die();
+	}
+
+	/**
+	*
+	* Get settings from transient and save into options api
+	*
+	* @since 3.1
+	* @param empty
+	* @return json object
+	*/
+	public function wpr_get_transient_from_data() {
+		$response = 'error';
+		$check_transient = get_transient('wpr_live_settings');
+		
+		if( $check_transient) {
+			$content = maybe_serialize($check_transient);
+			update_option('wprmenu_options', $check_transient);
+			$response = 'success';
+		}
+		
+		echo json_encode( array('status' => $response) );		
+		wp_die();
 	}
 }

@@ -14,21 +14,6 @@ function online_shop_register_required_plugins() {
     // Include Acme Demo Setup as recommended
     $plugins = array(
         array(
-            'name'      => 'Acme Demo Setup',
-            'slug'      => 'acme-demo-setup',
-            'required'  => false,
-        ),
-	    array(
-		    'name'      => 'WooCommerce',
-		    'slug'      => 'woocommerce',
-		    'required'  => false,
-	    ),
-	    array(
-		    'name'      => 'YITH WooCommerce Wishlist',
-		    'slug'      => 'yith-woocommerce-wishlist',
-		    'required'  => false,
-	    ),
-        array(
             'name'      => 'Gutentor',
             'slug'      => 'gutentor',
             'required'  => false,

@@ -75,15 +75,19 @@ if ( ! function_exists( 'online_shop_dynamic_css' ) ) :
         /*color*/
         $custom_css .= "
              a:hover,
+             a:focus,
             .screen-reader-text:focus,
             .socials a:hover,
+            .socials a:focus,
             .site-title a,
             .widget_search input#s,
             .search-block #searchsubmit,
             .widget_search #searchsubmit,
             .footer-sidebar .featured-desc .below-entry-meta a:hover,
+            .footer-sidebar .featured-desc .below-entry-meta a:focus,
             .slider-section .slide-title:hover,
             .slider-feature-wrap a:hover,
+            .slider-feature-wrap a:focus,
             .featured-desc .below-entry-meta span:hover,
             .posted-on a:hover,
             .cat-links a:hover,
@@ -92,8 +96,17 @@ if ( ! function_exists( 'online_shop_dynamic_css' ) ) :
             .tags-links a:hover,
             .byline a:hover,
             .nav-links a:hover,
+            .posted-on a:focus,
+            .cat-links a:focus,
+            .comments-link a:focus,
+            .edit-link a:focus,
+            .tags-links a:focus,
+            .byline a:focus,
+            .nav-links a:focus,
             .comment-form .form-submit input:hover, .read-more:hover,
+            .comment-form .form-submit input:hover, .read-more:focus,
             #online-shop-breadcrumbs a:hover,
+            #online-shop-breadcrumbs a:focus,
             .wpcf7-form input.wpcf7-submit,
             .header-wrapper .menu li:hover > a,
             .header-wrapper .menu > li.current-menu-item > a,
@@ -208,6 +221,7 @@ if ( ! function_exists( 'online_shop_dynamic_css' ) ) :
 
         /*Custom added*/
         $custom_css .= "
+        .header-wrapper .menu li .at-menu-desc:after,
           .menu-right-highlight-text:after{
             border-top-color:{$online_shop_primary_color};
           }
@@ -218,6 +232,10 @@ if ( ! function_exists( 'online_shop_dynamic_css' ) ) :
           .woocommerce .woocommerce-MyAccount-navigation ul li.is-active a:hover{
               background:{$online_shop_primary_color};
 
+          }
+          .header-wrapper .menu li .at-menu-desc,
+          .widget_online_shop_wc_taxonomies .acme-single-cat .cat-title{
+              background:{$online_shop_primary_color};
           }
         }";
         
