@@ -1138,9 +1138,9 @@ if ( ! function_exists( 'woocommerce_template_loop_category_title' ) ) {
 			<?php
 			echo esc_html( $category->name );
 
-			if ( $category->count > 0 ) {
-				echo apply_filters( 'woocommerce_subcategory_count_html', ' <mark class="count">(' . esc_html( $category->count ) . ')</mark>', $category ); // WPCS: XSS ok.
-			}
+			// if ( $category->count > 0 ) {
+			// 	echo apply_filters( 'woocommerce_subcategory_count_html', ' <mark class="count">(' . esc_html( $category->count ) . ')</mark>', $category ); // WPCS: XSS ok.
+			// }
 			?>
 		</h2>
 		<?php

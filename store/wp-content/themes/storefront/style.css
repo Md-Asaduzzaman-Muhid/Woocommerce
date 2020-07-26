@@ -655,7 +655,7 @@ body {
   .site-header .site-logo-anchor,
   .site-header .site-logo-link,
   .site-header .custom-logo-link {
-    display: block;
+    display: inline-block;
     margin-bottom: 0; }
     .site-header .site-logo-anchor img,
     .site-header .site-logo-link img,
@@ -711,6 +711,7 @@ body {
 .page-template-template-homepage .type-page {
   padding-top: 2.617924em;
   padding-bottom: 2.617924em;
+  display: none;
   position: relative; }
   .page-template-template-homepage .type-page .storefront-hero__button-edit {
     position: absolute;
@@ -754,7 +755,7 @@ body {
 .site-footer {
   background-color: #f3f3f3;
   color: #3b3c3f;
-  padding: 1.618em 0 3.706325903em; }
+  padding: 0; }
   .site-footer h1,
   .site-footer h2,
   .site-footer h3,
@@ -771,7 +772,8 @@ body {
       text-decoration: none; }
 
 .site-info {
-  padding: 2.617924em 0; }
+  padding: 10px 0;
+  text-align: center; }
   .site-info span[role=separator] {
     padding: 0 0.2360828548em 0 0.3342343017em; }
     .site-info span[role=separator]::before {
@@ -1509,7 +1511,7 @@ button.menu-toggle {
     padding: 0.875em 0;
     display: block; }
     .main-navigation ul li a:hover {
-      color: #e6e6e6; }
+      color: #009fe3 !important; }
 
 /**
  * Pagination
@@ -1642,6 +1644,11 @@ button.menu-toggle {
 .widget_search form,
 .widget_product_search form {
   position: relative; }
+.widget_product_search form input{
+  border: 2px solid#c7017f;
+border-radius: 22px; }
+.widget_product_search form input:focus{
+  outline: 0; }
   .widget_search form input[type=text],
   .widget_search form input[type=search],
   .widget_product_search form input[type=text],
@@ -1754,7 +1761,7 @@ button.menu-toggle {
   table.shop_table_responsive tbody tr th {
     text-align: left; }
   .site-header {
-    padding-top: 2.617924em;
+    /* padding-top: 2.617924em; */
     padding-bottom: 0; }
     .site-header .site-branding {
       display: block;
@@ -1770,11 +1777,13 @@ button.menu-toggle {
   .woocommerce-active .site-header .site-branding {
     width: 73.9130434783%;
     float: left;
+    margin-bottom: 0;
     margin-right: 4.347826087%; }
   .woocommerce-active .site-header .site-search {
     width: 21.7391304348%;
     float: right;
     margin-right: 0;
+    margin-top: 1.41575em;
     clear: none; }
   .woocommerce-active .site-header .main-navigation {
     width: 73.9130434783%;
@@ -2064,6 +2073,7 @@ button.menu-toggle {
         .secondary-navigation ul li:hover > ul,
         .secondary-navigation ul li.focus > ul {
           left: 0;
+          outline: none;
           display: block; }
           .main-navigation ul li:hover > ul li > ul, .main-navigation ul li.focus > ul li > ul,
           .secondary-navigation ul li:hover > ul li > ul,
@@ -2102,12 +2112,13 @@ button.menu-toggle {
           .secondary-navigation ul ul li a {
             width: 200px; }
   ul.menu li.current-menu-item > a {
-    color: #43454b; }
+    color: #009fe3 !important;}
   /**
 	 * Primary Navigation
 	 */
   .storefront-primary-navigation {
-    clear: both; }
+    clear: both;
+    background-color: #c7017f; }
     .storefront-primary-navigation::before, .storefront-primary-navigation::after {
       content: '';
       display: table; }
@@ -2124,7 +2135,10 @@ button.menu-toggle {
     transition: none; }
     .main-navigation ul.menu > li > a,
     .main-navigation ul.nav-menu > li > a {
-      padding: 1.618em 1em; }
+      padding: 1.618em 1em;
+      outline: none;
+      color: #f6f6f6;
+      font-weight: 700; }
     .main-navigation ul.menu > li.menu-item-has-children:hover::after, .main-navigation ul.menu > li.page_item_has_children:hover::after,
     .main-navigation ul.nav-menu > li.menu-item-has-children:hover::after,
     .main-navigation ul.nav-menu > li.page_item_has_children:hover::after {
@@ -2207,3 +2221,21 @@ button.menu-toggle {
     margin-left: 1.41575em;
     margin-right: 1.41575em;
     padding: 0; } }
+
+    /* Custom Added */
+.storefront-breadcrumb{
+  margin: 0 !important;
+}
+.add_to_cart_button {
+  border: 2px solid #c7017f !important;
+  color: #c7017f !important;
+}
+.cart-contents{
+  color: #fff !important;
+}
+.storefront-sorting select {
+  padding: 10px;
+}
+.storefront-sorting .woocommerce-result-count{
+  padding: 10px 0 !important;
+}
